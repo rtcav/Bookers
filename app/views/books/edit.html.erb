@@ -1,20 +1,36 @@
 <h1>Editing Book</h1>
+<!--error message-->
+<div class="error_message">
+	<%= flash[:alert] %>
+</div>
+
+<div id="error_explanation">
+<% if @book.errors.any? %>
+  <%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+</div>
+
+<!--form_with-->
 <%= form_with model: @book do |f| %>
 	<div class = "field">
-	<label for = "book_title">Title</label>
-	<imput class ="book_title" type="text" ><%= f.text_field :title %></imput>
-
+	  <label for = "book_title">Title</label>
+	  <imput class ="book_title" type="text" ><%= f.text_field :title %></imput>
 	</div>
 
 	<div class = "field">
-	<label for = "book_body">Body</label>
-	<text_area class = "book_body" name = "book[body]" id="book_body">
-	<%= f.text_area :body%>
-	</text_area>
-
+	  <label for = "book_body">Body</label>
+	  <text_area class = "book_body" name = "book[body]" id="book_body">
+   	  <%= f.text_area :body%>
+	  </text_area>
 	</div>
 
-	<div class = "actions"><%= f.submit 'Update Book' %>
+	<div class = "actions">
+	  <%= f.submit 'Update Book' %>
 	</div>
 <% end %>
 
